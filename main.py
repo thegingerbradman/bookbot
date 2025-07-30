@@ -5,16 +5,21 @@ def get_book_text(file_path):
 
 from stats import count_book_words, count_book_characters, sort_character_dicts
 def main():
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    
     script_header = "============ BOOKBOT ============"
     wc_header = "----------- Word Count ----------"
     char_header = "--------- Character Count -------"
     footer = "============= END ==============="
-    book_content = (get_book_text("./books/frankenstein.txt"))
+    book_content = (get_book_text(sys.argv[1]))
     word_count = count_book_words(book_content)
     character_count = count_book_characters(book_content)
     sorted_list = sort_character_dicts(character_count)
     print(script_header)
-    print("Analyzing book found at books/frankenstein.txt...")
+    print(f"Analyzing book found at {sys.argv[1]}")
     print(wc_header)
     print(f"Found {word_count} total words")
     print(char_header)
